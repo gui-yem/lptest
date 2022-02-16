@@ -18,4 +18,10 @@ export class PlayerService {
     this.messageService.add('PlayerService: fetched players');
     return players;
   }
+
+  getPlayer(id: number): Observable<Player> {
+    const player = PLAYERS.find(h => h.id === id)!;
+    this.messageService.add(`PlayerService: fetched player id=${id}`);
+    return of(player);
+  }
 }
