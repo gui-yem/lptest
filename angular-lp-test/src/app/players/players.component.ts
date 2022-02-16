@@ -21,4 +21,22 @@ export class PlayersComponent implements OnInit {
     this.playerService.getPlayers()
     .subscribe(players => this.players = players);
   }
+
+  add(name: string, power: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    var powerToNumber: number;
+    power = power.trim();
+    powerToNumber = +power;
+    if (!powerToNumber) { return; }
+    this.playerService.addPlayer({ name, power: powerToNumber } as Player)
+      .subscribe(player => {
+        this.players.push(player);
+      });
+  }
+
+  delete(player: Player): void {
+    this.players = this.players.filter(h => h !== player);
+    this.playerService.deletePlayer(player.id).subscribe();
+  }
 }
