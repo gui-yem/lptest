@@ -16,7 +16,7 @@ docker exec -it www_docker_symfony bash
 php bin/console doctrine:database:create
 
 ### Créer et Lancer les migations
-php bin/console make:migration
+php bin/console make:migration  
 php bin/console doctrine:migrations:migrate
 
 ### Charger les fixtures
