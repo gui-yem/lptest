@@ -10,6 +10,8 @@ import { PlayerService } from '../player.service';
 })
 export class PlayersComponent implements OnInit {
   players: Player[] = [];
+  playersAffrontSelection: Player[] = [];
+  affrontNotification: string = '';
 
   constructor(private playerService: PlayerService) { }
 
@@ -38,5 +40,33 @@ export class PlayersComponent implements OnInit {
   delete(player: Player): void {
     this.players = this.players.filter(h => h !== player);
     this.playerService.deletePlayer(player.id).subscribe();
+  }
+
+  addToSelection(player: Player): void {
+    this.playersAffrontSelection.push(this.players.filter(h => h == player)[0]);
+  }
+
+  resetSelection(): void {
+    this.playersAffrontSelection = [];
+    this.affrontNotification = '';
+  }
+
+  affront(): void {
+    if (this.playersAffrontSelection.length === 0) {
+      this.affrontNotification = "Aucun joueur sélectionné pour l'affrontement. Veuillez d'abord effectuer votre sélection en cliquant sur l'icone A de chaque joueur.";
+    } else {
+      var winner: string = '';
+      var bestPower: number = 0;
+      this.affrontNotification = '';
+
+      this.playersAffrontSelection.forEach(function (value) {
+        if (value.power > bestPower) {
+          bestPower = value.power
+          winner = value.name;
+          console.log(winner);
+        }
+      }); 
+      this.affrontNotification = 'The winner is: ' + winner;
+    }
   }
 }

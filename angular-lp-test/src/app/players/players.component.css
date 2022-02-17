@@ -73,6 +73,17 @@ input {
   background-color: #42545C;
 }
 
+.affront-button {
+ padding: .5rem 1.5rem;
+ font-size: 1rem;
+ margin-bottom: 0.2rem;
+}
+
+.affront-button:hover {
+  color: white;
+  background-color: #42545C;
+}
+
 button.delete {
   position: absolute;
   left: 210px;
@@ -87,4 +98,33 @@ button.delete {
 button.delete:hover {
   background-color: #525252;
   color: white;
+}
+
+button.select-affront {
+  position: absolute;
+  left: 170px;
+  top: 5px;
+  background-color: white;
+  color:  #525252;
+  font-size: 1.1rem;
+  margin: 0;
+  padding: 1px 10px 3px 10px;
+}
+
+button.select-affront:hover {
+  background-color: #525252;
+  color: white;
+}
+
+.container-left-50 {
+  float: left;
+  width: 50%;
+}
+.container-right-50 {
+  float: right;
+  width: 50%;
+}
+.affront-notification {
+  padding: 10px;
+  width: 100%;
 }

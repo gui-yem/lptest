@@ -4,8 +4,11 @@ label {
   font-weight: bold;
 }
 input {
-  font-size: 1em;
+  display: block;
+  width: 100%;
   padding: .5rem;
+  margin: 1rem 0;
+  box-sizing: border-box;
 }
 button {
   margin-top: 20px;

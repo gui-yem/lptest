@@ -1,8 +1,6 @@
 <div>
-  <label for="new-player-name">Nom: </label>
-  <input id="new-player-name" #playerName />
-  <label for="new-player-power">Force: </label>
-  <input id="new-player-power" type="number" #playerPower />
+  <input id="new-player-name" placeholder="Nom" #playerName />
+  <input id="new-player-power" type="number" placeholder="Force" #playerPower />
 
   <!-- (click) passes input value to add() and then clears the input -->
   <button type="button" class="add-button" (click)="add(playerName.value, playerPower.value); playerName.value=''; playerPower.value=''">
@@ -10,14 +8,33 @@
   </button>
 </div>
 
-<ul class="players">
-  <li *ngFor="let player of players">
-    <a routerLink="/detail/{{player.id}}">
-      <span class="badge">{{player.id}}</span>
-      <span class="name">{{player.name}}</span>
-      <span class="name">{{player.power}}</span>
-    </a>
-    <button type="button" class="delete" title="delete player"
-      (click)="delete(player)">x</button>
-  </li>
-</ul>
+<div class="container-left-50">
+  <ul class="players">
+    <li *ngFor="let player of players">
+      <a routerLink="/detail/{{player.id}}">
+        <span class="badge">{{player.id}}</span>
+        <span class="name" title="modifier ce joueur">{{player.name}}</span>
+      </a>
+      <button type="button" class="select-affront" title="sélectionner pour l'affrontement"
+        (click)="addToSelection(player)">A</button>
+      <button type="button" class="delete" title="supprimer le joueur"
+        (click)="delete(player)">x</button>
+    </li>
+  </ul>
+</div>
+
+<div class="container-right-50">
+  <div class="affront-notification">{{affrontNotification}}</div>
+  <ul class="players players-affront-list">
+    <li *ngFor="let player of playersAffrontSelection">
+      <a routerLink="/detail/{{player.id}}">
+        <span class="badge">{{player.id}}</span>
+        <span class="name">{{player.name}} - force: {{player.power}}</span>
+      </a>
+    </li>
+    <button type="button" class="affront-button" title="Lancer l'affrontement"
+      (click)="affront()">Lancer l'affrontement</button>
+    <button *ngIf="playersAffrontSelection.length > 0" type="button" class="affront-button" title="Vider la sélection"
+      (click)="resetSelection()">Vider la sélection</button>
+  </ul>
+</div>
